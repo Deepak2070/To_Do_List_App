@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <link rel="shortcut icon" href="/images/list.png" type="image/x-icon" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" type="text/css" href="/css/home.css">
+</head>
+<body>
+    <div class="container">
+        <h1 id="heading"><img src="/images/icons.png" alt="To Do App Image">TODO App</h1>
+        <hr>
+        <!-- Form -->
+        <div class="form">
+            <form action="/create-list" method="post">
+                <!-- Description -->
+                <div class="lbl1">
+                    <label for="desc" class="label">Description
+                        <input type="text" name="desc" id="desc" placeholder="What do you need to do?" required>
+                    </label>
+                </div>
+                <hr>
+                <!-- Category -->
+                <div class="lbl2">
+                    <label for="category" class="label" id="catg">Category
+                        <select name="category" id="category" aria-placeholder="Choose a category" required>
+                            <option value="" selected disabled>Choose a category</option>
+                            <option>Perosnal</option>
+                            <option>Work</option>
+                            <option>School</option>
+                            <option>Cleaning</option>
+                            <option>Others</option>
+                        </select> 
+                    </label>
+                    <hr>
+                    <!-- Date -->
+                    <label for="date" class="label" id="dt">Due Date
+                        <input type="date" name="date" id="date" required>
+                    </label>
+                </div>
+                <hr>
+                <!-- 2 buttons for adding and deleting the tasks -->
+                <button type="submit" class="btn" id="add_btn"><i class="fa-solid fa-plus"></i>&nbsp;&nbsp;Add Task</button>
+                
+            </form>
+
+            <!-- result will appear here -->
+
+            <div class="result">
+                <% if(todo_list.length === 0) { %>
+                    <p id="message">No tasks to Show. Create Tasks...</p>
+                <% } %>
+    
+                <ul>
+                    <% for(let i of todo_list) { %>
+                        <hr class="li">
+                        <li class="task">
+                            <input type="checkbox" name="delCheck" id="delCheck" <% if (i.done) { %>checked<% } %> onclick="markDone(this)">
+                            <div class="name_date">
+                                <p id="dispDesc"><%= i.desc %></p>
+                                <p id="dispDate" class="dueDate" ><i class="fa-solid fa-calendar-days" style="color: #717070;"></i>&nbsp;&nbsp;<%= i.date %></p>
+                            </div>
+                            <div class="catsec  <%= i.category.toLowerCase() %>">
+                                <p class="catg"><%= i.category %></p>
+                            </div>
+                            <div class="delete-btn">
+                                <a href="/delete-task/?id=<%= i._id %>">
+                                    <i class="fa-solid fa-trash"></i>
+                                </a>
+                            </div>
+                        </li>
+                    <% } %>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="/js/home.js"></script>
+</body>
+</html>

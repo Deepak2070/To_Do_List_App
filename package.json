@@ -1,0 +1,17 @@
+{
+  "name": "to-do_list",
+  "version": "1.0.0",
+  "description": "A simple To Do List Application build on node.js and express.js",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Mukund Jee Tiwari",
+  "license": "ISC",
+  "dependencies": {
+    "ejs": "^3.1.9",
+    "express": "^4.18.2",
+    "mongoose": "^7.4.0"
+  }
+}
